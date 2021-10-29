@@ -13,26 +13,29 @@ function game() {
     let round = playRound(playerSelection, computerSelection);
     if (round === "WIN") {
       playerPoints++;
-      console.log("You win");
+      alert("You win");
+      console.log("WIN");
       console.log(playerPoints, computerPoints);
     } else if (round === "LOSS") {
       computerPoints++;
-      console.log("You lose");
+      alert("You lose");
+      console.log("LOSE");
       console.log(playerPoints, computerPoints);
     } else if (round === "TIE") {
-      console.log("TIED");
+      alert("TIED");
+      console.log("TIE");
       console.log(playerPoints, computerPoints);
     }
   }
 
   if (playerPoints < computerPoints) {
-    console.log(`The computer beat you ${computerPoints} to ${playerPoints}`);
+    alert(`The computer beat you ${computerPoints} to ${playerPoints}`);
   } else if (playerPoints > computerPoints) {
-    console.log(
+    alert(
       `Congratulations. You beat the computer ${playerPoints} to ${computerPoints} `
     );
   } else {
-    console.log(`The game ended in a draw`);
+    alert(`The game ended in a draw`);
   }
   function playRound(playerSelection, computerSelection) {
     if (playerSelection == "ROCK") {
