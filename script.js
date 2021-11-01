@@ -15,12 +15,6 @@ function computerPlay() {
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
-// TODO only show restart button once winsNeeded have been met
-const restart = document.querySelector("#restart");
-restart.addEventListener("click", function () {
-  location.reload();
-});
-
 const rock = document.querySelector("#rock"),
   paper = document.querySelector("#paper"),
   scissors = document.querySelector("#scissors");
@@ -62,9 +56,11 @@ function gameResults() {
   if (playerScore == winsNeeded || computerScore == winsNeeded) {
     if (playerScore < computerScore) {
       alert("YOU LOSE");
+      location.reload();
       return `YOU LOSE`;
     } else if (playerScore > computerScore) {
       alert("YOU WIN");
+      location.reload();
       return `YOU WIN`;
     }
   }
@@ -88,7 +84,14 @@ function game(playerSelection) {
     ties++;
   }
   scoreWindow.innerHTML =
-    "Player:" + playerScore + " " + "Computer:" + computerScore;
+    "Player:" +
+    playerScore +
+    " " +
+    "Computer:" +
+    computerScore +
+    " " +
+    "Ties:" +
+    ties;
   console.log(
     `Player Wins: ${playerScore}; Computer Wins: ${computerScore}; Ties: ${ties}`
   );
