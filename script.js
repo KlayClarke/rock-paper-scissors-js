@@ -67,7 +67,7 @@ function gameResults() {
 }
 
 function game(playerSelection) {
-  console.log(`Round ${round}`);
+  console.log(`ROUND ${round}`);
   console.log(playerSelection);
   let computerSelection = computerPlay();
   console.log(computerSelection);
