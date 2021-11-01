@@ -3,6 +3,8 @@ let winsNeeded = prompt(
 );
 
 let round = 1;
+let scoreWindow = document.querySelector(".scores");
+
 let playerScore = 0;
 let computerScore = 0;
 let ties = 0;
@@ -85,6 +87,8 @@ function game(playerSelection) {
     round++;
     ties++;
   }
+  scoreWindow.innerHTML =
+    "Player:" + playerScore + " " + "Computer:" + computerScore;
   console.log(
     `Player Wins: ${playerScore}; Computer Wins: ${computerScore}; Ties: ${ties}`
   );
