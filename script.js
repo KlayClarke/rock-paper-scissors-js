@@ -1,66 +1,91 @@
-let playerName = prompt("What is your name?");
+let winsNeeded = prompt(
+  "How much wins should one need to be declared victorious?"
+);
 
-const choices = ["rock", "paper", "scissors"];
+let round = 1;
+let playerScore = 0;
+let computerScore = 0;
+let ties = 0;
+
+let choices = ["rock", "paper", "scissors"];
 
 function computerPlay() {
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
-let playerSelection = choices[Math.floor(Math.random() * choices.length)];
+// TODO only show restart button once winsNeeded have been met
+const restart = document.querySelector("#restart");
+restart.addEventListener("click", function () {
+  location.reload();
+});
 
-let computerSelection = computerPlay();
+const rock = document.querySelector("#rock"),
+  paper = document.querySelector("#paper"),
+  scissors = document.querySelector("#scissors");
 
-let playerScore = 0;
-let computerScore = 0;
+rock.addEventListener("click", function () {
+  let playerSelection = "rock";
+  game(playerSelection);
+});
+
+paper.addEventListener("click", function () {
+  let playerSelection = "paper";
+  game(playerSelection);
+});
+
+scissors.addEventListener("click", function () {
+  let playerSelection = "scissors";
+  game(playerSelection);
+});
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection == "rock" && computerSelection == "paper") {
-    return "lose";
+    return "lose round";
   } else if (playerSelection == "rock" && computerSelection == "scissors") {
-    return "win";
+    return "win round";
   } else if (playerSelection == "paper" && computerSelection == "rock") {
-    return "win";
+    return "win round";
   } else if (playerSelection == "paper" && computerSelection == "scissors") {
-    return "lose";
+    return "lose round";
   } else if (playerSelection == "scissors" && computerSelection == "rock") {
-    return "lose";
+    return "lose round";
   } else if (playerSelection == "scissors" && computerSelection == "paper") {
-    return "win";
+    return "win round";
   } else {
-    return "tied";
+    return "tied round";
   }
 }
 
 function gameResults() {
-  if (playerScore == computerScore) {
-    return "Game Results In Tie";
-  } else if (playerScore < computerScore) {
-    return `${playerName} loses`;
-  } else if (playerScore > computerScore) {
-    return `${playerName} wins`;
+  if (playerScore == winsNeeded || computerScore == winsNeeded) {
+    if (playerScore < computerScore) {
+      return `YOU LOSE`;
+    } else if (playerScore > computerScore) {
+      return `YOU WIN`;
+    }
   }
 }
 
-function game() {
-  for (i = 0; i < 5; i++) {
-    let playerSelection = prompt("rock, paper, or scissors?").toLowerCase();
-    let computerSelection = computerPlay();
-    let result = playRound(playerSelection, computerSelection);
-
-    if (result == "win") {
-      playerScore++;
-    } else if (result == "lose") {
-      computerScore++;
-    }
-
-    console.log(playerSelection);
-    console.log(computerSelection);
-    console.log(playRound(playerSelection, computerSelection));
-    alert(`${playerName}: ${playerScore}; Computer: ${computerScore}`);
-    console.log(`${playerName}: ${playerScore}; Computer: ${computerScore}`);
+function game(playerSelection) {
+  console.log(`Round ${round}`);
+  console.log(playerSelection);
+  let computerSelection = computerPlay();
+  console.log(computerSelection);
+  let roundResults = playRound(playerSelection, computerSelection);
+  console.log(roundResults);
+  if (roundResults == "win round") {
+    round++;
+    playerScore++;
+  } else if (roundResults == "lose round") {
+    round++;
+    computerScore++;
+  } else {
+    round++;
+    ties++;
   }
-  alert(gameResults());
+  console.log(
+    `Player Wins: ${playerScore}; Computer Wins: ${computerScore}; Ties: ${ties}`
+  );
+  gameResults();
   console.log(gameResults());
 }
-
-game();
