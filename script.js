@@ -59,8 +59,10 @@ function playRound(playerSelection, computerSelection) {
 function gameResults() {
   if (playerScore == winsNeeded || computerScore == winsNeeded) {
     if (playerScore < computerScore) {
+      alert("YOU LOSE");
       return `YOU LOSE`;
     } else if (playerScore > computerScore) {
+      alert("YOU WIN");
       return `YOU WIN`;
     }
   }
